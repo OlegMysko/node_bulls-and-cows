@@ -11,7 +11,7 @@
 function checkIsValidUserInput(userInput) {
   /* Write your code here */
 
-  if (Number.isNaN(+userInput)) {
+  if (!(/^\d{4}$/.test(+userInput))) {
     return false;
   }
 

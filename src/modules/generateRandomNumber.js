@@ -6,29 +6,24 @@
  *
  * @return {number} A random 4-digit number
  */
-function generateRandomNumber() {
-  /* Write your code here */
-  const randomNumberArray = Math.floor(Math.random() * 100000000)
-    .toString()
-    .split('');
-  const result = randomNumberArray.reduce((acum, value) => {
-    if (!acum.includes(value)) {
-      return acum.concat(value);
-    }
+function generateRandomNumber(){
+  const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-    return acum;
-  }, []);
-
-  if (result[0] === '0') {
-    result.shift();
+  for (let i = digits.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [digits[i], digits[j]] = [digits[j], digits[i]];
   }
 
-  if (result.length < 4) {
-    return generateRandomNumber();
+
+  if (digits[0] === '0') {
+    const nonZeroIndex = digits.findIndex(d => d !== '0');
+    [digits[0], digits[nonZeroIndex]] = [digits[nonZeroIndex], digits[0]];
   }
 
-  return +result.slice(0, 4).join('');
+  const result = digits.slice(0, 4).join('');
+  return +result;
 }
+
 
 module.exports = {
   generateRandomNumber,

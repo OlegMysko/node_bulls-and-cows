@@ -17,7 +17,7 @@ function question() {
     'What four-digit **** number did i guess?',
     (inputNumber) => {
       if (!checkIsValidUserInput(inputNumber)) {
-        process.stdout.write('try again ivalid input\n');
+        process.stdout.write('try again invalid input\n');
 
         return question();
       }
