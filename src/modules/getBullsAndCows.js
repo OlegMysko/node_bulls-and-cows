@@ -12,26 +12,34 @@
  * @return {object} An object containing the number of bulls and cows.
  * Example: { bulls: 1, cows: 2 }
  */
-function getBullsAndCows(userInput, numberToGuess) {
-  let cows = 0;
+function getBullsAndCows(secret, guess) {
   let bulls = 0;
-  const use = userInput.toString();
-  const get = numberToGuess.toString();
+  let cows = 0;
 
-  for (let i = 0; i < use.length; i++) {
-    if (use[i] === get[i]) {
+  const useChecked = Array(4).fill(false);
+  const guessChecked = Array(4).fill(false);
+
+  for (let i = 0; i < 4; i++) {
+    if (secret[i] === guess[i]) {
       bulls++;
-    } else if (use.includes(get[i])) {
-      cows++;
+      useChecked[i] = true;
+      guessChecked[i] = true;
     }
   }
 
-  return {
-    bulls: bulls,
-    cows: cows,
-  };
+  for (let i = 0; i < 4; i++) {
+    if (guessChecked[i]) continue;
 
-  /* Write your code here */
+    for (let j = 0; j < 4; j++) {
+      if (!useChecked[j] && guess[i] === secret[j]) {
+        cows++;
+        useChecked[j] = true;
+        break;
+      }
+    }
+  }
+
+  return { bulls, cows };
 }
 
 module.exports = {

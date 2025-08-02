@@ -11,15 +11,11 @@
 function checkIsValidUserInput(userInput) {
   /* Write your code here */
 
-  if (!(/^\d{4}$/.test(+userInput))) {
+  if (!/^\d{4}$/.test(userInput)) {
     return false;
   }
 
   if (userInput.toString()[0] === '0') {
-    return false;
-  }
-
-  if (userInput.split('').length !== 4) {
     return false;
   }
 
