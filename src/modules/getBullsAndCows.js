@@ -12,7 +12,12 @@
  * @return {object} An object containing the number of bulls and cows.
  * Example: { bulls: 1, cows: 2 }
  */
+'use strict';
+
 function getBullsAndCows(secret, guess) {
+  const secretStr = String(secret);
+  const guessStr = String(guess);
+
   let bulls = 0;
   let cows = 0;
 
@@ -20,7 +25,7 @@ function getBullsAndCows(secret, guess) {
   const guessChecked = Array(4).fill(false);
 
   for (let i = 0; i < 4; i++) {
-    if (secret[i] === guess[i]) {
+    if (secretStr[i] === guessStr[i]) {
       bulls++;
       useChecked[i] = true;
       guessChecked[i] = true;
@@ -28,10 +33,12 @@ function getBullsAndCows(secret, guess) {
   }
 
   for (let i = 0; i < 4; i++) {
-    if (guessChecked[i]) continue;
+    if (guessChecked[i]) {
+      continue;
+    }
 
     for (let j = 0; j < 4; j++) {
-      if (!useChecked[j] && guess[i] === secret[j]) {
+      if (!useChecked[j] && guessStr[i] === secretStr[j]) {
         cows++;
         useChecked[j] = true;
         break;
